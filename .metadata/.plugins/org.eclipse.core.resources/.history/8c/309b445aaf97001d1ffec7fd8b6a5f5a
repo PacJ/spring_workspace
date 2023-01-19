@@ -1,0 +1,20 @@
+package part03_exam;
+
+public class User implements Service{
+	private String id;
+	private String pass;
+	
+	public User() {
+		
+	}
+	
+	public User(String id, String pass) {
+		this.id=id;
+		this.pass=pass;
+	}
+
+	@Override
+	public void prn() {
+		
+	}
+}

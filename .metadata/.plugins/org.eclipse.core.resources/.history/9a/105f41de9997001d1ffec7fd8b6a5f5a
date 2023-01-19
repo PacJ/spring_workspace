@@ -1,0 +1,9 @@
+package sample03;
+
+public class MessageFactory {
+
+	public MessageFactory() {
+
+	}
+	
+}//end class

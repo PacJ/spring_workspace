@@ -1,0 +1,17 @@
+package part05_exam;
+
+public class ServiceImp implements Service{
+	public MemDaoImp memDao;
+	
+	public ServiceImp(MemDaoImp memDao) {
+		memDao = this.memDao;
+	}
+
+
+	@Override
+	public void prn() {
+		System.out.println(memDao);
+	}
+	
+	
+}

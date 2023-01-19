@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!-- MessageBeanKorea mb = new MessageBeanKorea() -->
+<!-- IOC : 어떠한 작업을 다른 쪽으로 위임하는 것. -->
+<!--  <bean id="mb" class="part01.MessageBeanKorea" /> -->
+</beans>

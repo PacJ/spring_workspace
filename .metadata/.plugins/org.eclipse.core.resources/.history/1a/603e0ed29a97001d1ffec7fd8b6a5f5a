@@ -1,0 +1,18 @@
+package sample03;
+
+public class HelloSpring {
+
+	public static void main(String[] args) {
+		MessageBean bean = null;
+		bean = MessageFactory.getInstance("ko");
+		display(bean, "Jarvis");
+		
+		bean = MessageFactory.getInstance("en");
+		display(bean, "V");
+	}
+	
+	public static void display(MessageBean bean, String name) {
+		bean.sayHello(name);
+	}//end display
+
+}

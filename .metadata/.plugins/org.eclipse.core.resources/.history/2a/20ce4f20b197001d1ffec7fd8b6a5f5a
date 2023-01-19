@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<bean id="user" class="part03_exam.User" />
+<bean id="svc" class="part03_exam.ServiceImp">
+	<constructor-arg value="kim" type="java.lang.String" />
+	<constructor-arg value="a1234" type="java.lang.String" />
+</bean>
+</beans>

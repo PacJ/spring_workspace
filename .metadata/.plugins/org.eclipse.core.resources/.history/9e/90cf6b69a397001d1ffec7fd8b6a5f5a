@@ -1,0 +1,5 @@
+package part02;
+
+public class ServiceImp implements Service{
+
+}

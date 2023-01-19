@@ -1,0 +1,11 @@
+package part04_property;
+
+public class SpringTest {
+
+	public static void main(String[] args) {
+		String path = "part04_property.di.xml";
+		
+
+	}
+
+}

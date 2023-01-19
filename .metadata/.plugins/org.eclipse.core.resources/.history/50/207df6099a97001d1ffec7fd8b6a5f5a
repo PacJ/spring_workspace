@@ -1,0 +1,13 @@
+package sample03;
+
+public class MessageFactory {
+
+	public MessageFactory() {
+
+	}
+	
+	public static MessageBean getInstance(String type) {
+		
+	}//end getInstance()
+	
+}//end class

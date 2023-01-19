@@ -1,0 +1,18 @@
+package part03_exam;
+
+public class ServiceImp implements Service{
+
+	public ServiceImp() {
+		
+	}
+
+	public ServiceImp() {
+		this.user = user;
+	}
+	@Override
+	public void prn() {
+		
+	}
+	
+	
+}

@@ -1,0 +1,12 @@
+package part04_property;
+
+import java.util.Random;
+
+public class ServiceImp {
+	private String name;
+	private Random ran;
+	
+	public ServiceImp() {
+		
+	}
+}

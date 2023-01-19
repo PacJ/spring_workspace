@@ -1,0 +1,8 @@
+package sample01;
+
+public class MessageBeanKorea {
+
+	public MessageBeanKorea() {
+		
+	}
+}

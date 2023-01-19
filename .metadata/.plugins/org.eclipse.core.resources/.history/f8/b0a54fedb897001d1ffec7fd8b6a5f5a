@@ -1,0 +1,10 @@
+package part05_exam;
+
+public class ServiceImp {
+
+	public ServiceImp() {
+		
+	}
+	
+	
+}

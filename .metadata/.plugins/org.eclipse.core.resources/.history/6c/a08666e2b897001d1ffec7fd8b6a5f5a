@@ -1,0 +1,10 @@
+package part05_exam;
+
+public class SpringTest {
+
+	public static void main(String[] args) {
+		String path = "part05_exam/di.xml";
+
+	}
+
+}

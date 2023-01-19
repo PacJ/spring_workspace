@@ -1,0 +1,14 @@
+package sample03;
+
+public class HelloSpring {
+
+	public static void main(String[] args) {
+		MessageBean bean = MessageFactory.getInstance("en");
+		bean.sayHello("Jarvis");
+	}
+	
+	public static void display(MessageBean bean, String name) {
+		bean.sayHello(name);
+	}//end display
+
+}

@@ -1,0 +1,24 @@
+package part02;
+
+public class ServiceImp implements Service{
+
+	public ServiceImp() {
+
+	}
+	
+	@Override
+	public void prn1() {
+		
+	}
+
+	@Override
+	public void prn2() {
+		
+	}
+
+	@Override
+	public void prn3() {
+		
+	}
+
+}
