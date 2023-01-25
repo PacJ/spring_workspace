@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!-- Controller -->
+<bean class = "part01.HelloController" />
+<bean class = "part02.HelloModelAndViewController" />
+<bean class = "part03.HelloCommandController" />
+<bean class = "part04.HelloModelController" />
+
+<!-- ViewResolver -->   <!-- prefix + part01/hello + suffix -->
+						<!-- /WEB-INF/views/part01/hello.jsp -->
+<bean class = "org.springframework.web.servlet.view.InternalResourceViewResolver">
+	<property name = "prefix" value = "/WEB-INF/views/"></property>
+	<property name = "suffix" value = ".jsp" />
+</bean>
+</beans>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+
+<!-- Target - 핵심관심사항 반 선언 -->
+<bean id = "svc" class = "part01_xml.ServiceImp" />
+
+<!-- Advice - 공통관심사항 빈 선언 -->
+<bean id = "common" class = "part01_xml.AdviceCommon" />
+
+<!-- poincut 표현식
+   [1] pointcut의 명시자 종류
+    ⓐ execution :Advice를 적용할 메서드를 명시할 때 사용한다.
+    ⓑ within : 특정 타입에 속하는 메서드를 JoinPoint로 설정되도록 명시할 때 사용한다.
+    ⓒ bean : 스프링 2.5 버전부터 지원했으며, 스프링 빈을 이용하여 Joinpoint를 설정한다.
+   [2] execution 명시자   
+   pointcut="execution(메소드접근제어자 메소드리턴타입 패키지.클래스.메소드(*,*))"   
+   ⓐ 메소드접근제어자는 생략 할 수 있다.
+   ⓑ 메소드의 아큐먼트 
+       "*" :  모든 데이터자료형의 아큐먼트 1개
+       "int" : int 데이터 자료형의 아큐먼트 1개
+       ".." : 아큐먼트 0개 이상(모든) 
+   -->
+
+<!-- aspect : 공통관심사항을 나타내는 추상명사 -->
+<aop:config>
+	<aop:aspect ref = "common">
+	
+		<!-- <aop:before method = "comm1" pointcut = "execution(public void part01_xml.ServiceImp.prn1())" />
+		<aop:before method = "comm1" pointcut = "execution(public void part01_xml.ServiceImp.prn1(int))" />
+		<aop:before method = "comm1" pointcut = "execution(public void part01_xml.ServiceImp.prn1(java.util.Random))" />
+		<aop:before method = "comm1" pointcut = "execution(public void part01_xml.ServiceImp.prn1(int, int))" />
+		
+		<aop:before method = "comm1" pointcut = "execution(public void part01_xml.ServiceImp.prn1(*))" /> | *은 임의의 데이터 하나라는 뜻
+		<aop:before method = "comm1" pointcut = "execution(public void part01_xml.ServiceImp.prn1(*, *))" />
+		
+		<aop:before method = "comm1" pointcut = "execution(public void part01_xml.ServiceImp.prn1(..))" />
+		
+		<aop:before method = "comm1" pointcut = "execution(* part01_xml.ServiceImp.prn1(..))" /> -->
+		
+		<aop:pointcut expression = "execution(* part01_xml.ServiceImp.prn1(..))" id = "aa" />
+		<aop:pointcut expression = "execution(* part01_xml.ServiceImp.prn2(..))" id = "bb" />
+		<aop:pointcut expression = "execution(* part01_xml.ServiceImp.prn3(..))" id = "cc" />
+		<aop:pointcut expression = "execution(* part01_xml.ServiceImp.prn4(..))" id = "dd" />
+		<aop:pointcut expression = "execution(* part01_xml.ServiceImp.prn5(..))" id = "ee" />
+		
+		<aop:before method = "comm1" pointcut-ref = "aa" />
+		<aop:after method = "comm2" pointcut-ref = "bb" />
+		<aop:after-returning method = "comm3" pointcut-ref = "cc" returning = "name" />
+		<aop:after-throwing method = "comm4" pointcut-ref = "dd" throwing = "ex" />
+		<aop:around method= "comm5" pointcut-ref = "ee" />
+		
+	</aop:aspect>
+</aop:config>
+</beans>
