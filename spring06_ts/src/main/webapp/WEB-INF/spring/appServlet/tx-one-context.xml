@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!-- TransactionTemplate를 이용한 트랜잭션 처리 -->
+
+<!-- Spring JDBC나 Mybatis를 이용해서 DB연동을 처리하는 경우
+		DataSourceTransactionManager가 트랜잭션 관리자로 사용된다. -->
+	<!-- [4] TransactionManager Bean 선언 -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />	
+	</bean>
+	
+	
+	<!-- [5] TransactionTemplate bean 선언 -->
+	<bean id="transactionTemplate" class="org.springframework.transaction.support.TransactionTemplate">
+		<property name="transactionManager" ref="transactionManager" />
+	</bean>
+	
+	<!-- [6] MemDaoImp bean 선언 -->
+	<bean id="memDao" class="dao.MemDaoImp">
+		<property name="sqlSession" ref="sqlSession" />
+	</bean>
+	
+	<!-- [7] ServiceImp bean 선언 -->
+	<bean id="service" class="part01.ServiceImp">
+		<property name="memDao" ref="memDao" />
+		<property name="transactionTemplate" ref="transactionTemplate" />
+	</bean>
+	
+	<!-- [8] MemController bean 선언 -->
+	<bean class="part01.MemController">
+		<property name="svc" ref="service" />
+	</bean>
+</beans>

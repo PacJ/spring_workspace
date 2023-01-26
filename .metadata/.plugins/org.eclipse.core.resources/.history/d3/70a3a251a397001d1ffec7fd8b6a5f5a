@@ -1,9 +1,0 @@
-package part02;
-
-import java.util.Random;
-
-public interface Service {
-	public void prn1();
-	public void prn2();
-	public void prn3();
-}

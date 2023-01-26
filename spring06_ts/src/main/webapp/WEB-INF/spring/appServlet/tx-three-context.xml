@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+
+
+	<!-- 선언적 트랜잭션 : <tx:advice>태그를 이용한 트랜잭션 -->
+	
+	<!-- Spring JDBC나 Mybatis를 이용해서 DB연동을 처리하는 경우
+		DataSourceTransactionManager가 트랜잭션 관리자로 사용된다. -->
+	<!-- [4] TransactionManager Bean 선언 -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />	
+	</bean>
+	
+	<!-- [5] 선언적 트랜잭션 : annotation을 이용한 트랜잭션 처리 -->
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+	
+	<!-- [6] MemDaoImp bean 선언 -->
+	<bean id="memDao" class="dao.MemDaoImp">
+		<property name="sqlSession" ref="sqlSession" />
+	</bean>
+	
+	<!-- [7] ServiceImp bean 선언 -->
+	<bean id="service" class="part03.ServiceImp">
+		<property name="memDao" ref="memDao" />
+	</bean>
+	
+	<!-- [8] MemController bean 선언 -->
+	<bean class="part03.MemController">
+		<property name="svc" ref="service" />
+	</bean>
+
+</beans>

@@ -1,5 +1,0 @@
-package part04_property;
-
-public interface Service {
-
-}
