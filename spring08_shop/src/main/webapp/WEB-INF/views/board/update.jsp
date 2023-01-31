@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix = "c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix = "fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
@@ -13,6 +13,7 @@ $(document).ready(function(){
    });
 });
 </script>
+
 <div class="container">
    <form name="frm" id="frm" method="post" enctype="multipart/form-data">
       <table class="table table-bordered mt-1">
@@ -37,12 +38,10 @@ $(document).ready(function(){
             <th>내용</th>
             <td colspan="3">
             <textarea name="content"
-                  id="content" rows="13" style="width:100%" >
-                  ${dto.content}
-            </textarea></td>
+                  id="content" rows="13" style="width:100%" >${dto.content}</textarea></td>
          </tr>
 
-         <tr>
+         <tr>   
             <th>첨부파일</th>
             <td colspan="3"><input type="file" name="filename" /> <span>${fn:substringAfter(dto.upload, "_") }</span>
             </td>
@@ -56,7 +55,4 @@ $(document).ready(function(){
          <input type="button" id="back" value="뒤로" />
       </div>   
    </form>
- </div>
-
-
-
+</div>
