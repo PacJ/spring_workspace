@@ -2,14 +2,28 @@
 <!DOCTYPE tiles-definitions PUBLIC
        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
-       
 <tiles-definitions>
-<definition name="defaultLayout" template="/WEB-INF/views/template/layout.jsp">
-	<put-attribute name="title" value=""/>
-	<put-attribute name="header" value="/WEB-INF/views/template/header.jsp"/>
-	<put-attribute name="menu" value="/WEB-INF/views/template/menu.jsp"/>
-	<put-attribute name="footer" value="/WEB-INF/views/template/footer.jsp"/>
-	<put-attribute name="body" value=""/>
-</definition>
-
+	<definition name = "defaultLayout" template = "/WEB-INF/views/template/layout.jsp">
+		<put-attribute name = "title" value = ""/>
+		<put-attribute name = "header" value = "/WEB-INF/views/template/header.jsp"/>
+		<put-attribute name = "menu" value = "/WEB-INF/views/template/menu.jsp"/>
+		<put-attribute name = "footer" value = "/WEB-INF/views/template/footer.jsp"/>
+		<put-attribute name = "body" value = ""/>
+	</definition>
+	
+	<definition name = "index" extends = "defaultLayout">
+		<put-attribute name="title" value = "Spring Tiles Example"/>
+		<put-attribute name="body" value = "/WEB-INF/views/body.jsp"/>
+	</definition>
+	
+	<definition name = "menu1" extends = "defaultLayout">
+		<put-attribute name="title" value = "Spring Menu1 Example"/>
+		<put-attribute name="body" value = "/WEB-INF/views/menu1.jsp"/>
+	</definition>
+	
+	<definition name = "menu2" extends = "defaultLayout">
+		<put-attribute name="title" value = "Spring Menu2 Example"/>
+		<put-attribute name="body" value = "/WEB-INF/views/menu2.jsp"/>
+	</definition>
+	
 </tiles-definitions>

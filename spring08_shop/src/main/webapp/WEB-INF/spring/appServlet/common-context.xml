@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+
+	<!-- [1] DataSource 빈 선언 -->
+	<bean id = "dataSource" class = "org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name = "driverClassName" value = "oracle.jdbc.OracleDriver" />
+		<property name = "url" value = "jdbc:oracle:thin:@127.0.0.1:1521:xe" />
+		<property name = "username" value = "hr" />
+		<property name = "password" value = "a1234" />
+	</bean>
+	
+	<!-- [2] SqlSessionFactoryBean 빈 선언 -->
+	<bean id = "sqlSessionFactoryBean" class = "org.mybatis.spring.SqlSessionFactoryBean">
+		<property name = "dataSource" ref = "dataSource" />
+		<property name = "mapperLocations" >
+			<list>
+				<value>classpath:mapper/boardMapper.xml</value>
+			</list>
+		</property>
+		
+		<!-- <property name="configLocation" value = "classpath:mapper/configuration.xml"></property> -->
+	</bean>
+	
+	<!-- [3] SqlSessionTemplate 빈 선언 -->
+	<bean id = "sqlSession" class = "org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref = "sqlSessionFactoryBean" />
+	</bean>
+	
+	<!-- 선언적 트랜잭션 : <tx:advice> 태그를 이용한 트랙잭션 -->
+	
+	<!-- Spring JDBC나 Mybatis를 이용해서 DB연동을 처리하는 경우 
+			DataSourceTransactionManager가 트랜잭션 관리자로 사용된다. -->
+	
+	<!-- [4] TransactionManager 빈 선언 -->
+	<bean id = "transactionManager" class = "org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name = "dataSource" ref = "dataSource" />
+	</bean>
+	
+	<!-- [5] 선언적 트랜잭션 : <tx:advice> 태그를 이용한 트랜잭션 처리 -->
+	<tx:advice id = "txAdvice" transaction-manager = "transactionManager">
+		<tx:attributes>
+			<tx:method name = "*Process" rollback-for="org.springframework.dao.DuplicateKeyException" />
+		</tx:attributes>
+	</tx:advice>
+	
+	<aop:config>
+		<aop:pointcut expression = "execution(*  service.*ServiceImp.*Process(..))" id = "aa" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref = "aa"/>
+	</aop:config>
+	
+	<!-- 파일 첨부 -->
+	<bean id = "multipartResolver"
+		  class = "org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		  <property name="maxUploadSize" value = "1000000000"/>
+	</bean>
+	
+	<!-- controller -->
+	<bean class = "com.mycompany.myapp.HomeController"/>
+	
+	<!-- tiles -->
+	<bean class = "org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+		<property name="definitions">
+			<list>
+				<value>/WEB-INF/tiles/tiles.xml</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- ViewResolver -->
+	<bean class = "org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<property name="viewClass" value = "org.springframework.web.servlet.view.tiles3.TilesView"/>
+	</bean>
+</beans>

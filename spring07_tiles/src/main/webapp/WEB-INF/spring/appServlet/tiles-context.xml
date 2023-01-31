@@ -4,10 +4,13 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 <!-- controller -->
-<bean class="controller.IndexController" />
+<bean class = "controller.IndexController"/>
+<bean class = "controller.MenuOneController"/>
+<bean class = "controller.MenuTwoController"/>
+<bean class = "controller.DetailController"/>
 
 <!-- tiles -->
-<bean class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+<bean class = "org.springframework.web.servlet.view.tiles3.TilesConfigurer">
 	<property name="definitions">
 		<list>
 			<value>/WEB-INF/tiles.xml</value>
@@ -16,7 +19,15 @@
 </bean>
 
 <!-- view -->
-<bean class="org.springframework.web.servlet.view.UrlBasedViewResolver">
-	<property name="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView" />
+<bean class = "org.springframework.web.servlet.view.UrlBasedViewResolver">
+	<property name="viewClass" value = "org.springframework.web.servlet.view.tiles3.TilesView"/>
+	<property name="order" value = "1"/>
 </bean>
-</beans>
+
+<bean class = "org.springframework.web.servlet.view.InternalResourceViewResolver">
+	<property name="prefix" value = "/WEB-INF/views/"/>
+	<property name="suffix" value = ".jsp"/>
+	<property name="order" value = "2"/>
+</bean>
+
+</beans>   
