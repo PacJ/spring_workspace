@@ -19,32 +19,41 @@
 		<put-attribute name="content" value = "/WEB-INF/views/home.jsp"/>
 	</definition>
 	
-	<definition name = "board/list" extends = "baseLayout">
+	<definition name = "boardLayout" extends = "baseLayout">
 		<put-attribute name="title" value = "게시판"/>
 		<put-attribute name="heading" value = "마이 게시판"/>
 		<put-attribute name="subheading" value = "Welcome to MyBoard"/>
+	</definition>
+	
+	<definition name = "board/list" extends = "boardLayout">
 		<put-attribute name="content" value = "/WEB-INF/views/board/list.jsp"/>
 	</definition>
 	
-	<definition name = "board/write" extends = "baseLayout">
-		<put-attribute name="title" value = "게시판"/>
-		<put-attribute name="heading" value = "마이 게시판"/>
-		<put-attribute name="subheading" value = "Welcome to MyBoard"/>
-		<put-attribute name="content" value = "/WEB-INF/views/board/write.jsp"/>
-	</definition>
-	
-	<definition name = "board/view" extends = "baseLayout">
-		<put-attribute name="title" value = "게시판"/>
-		<put-attribute name="heading" value = "마이 게시판"/>
-		<put-attribute name="subheading" value = "Welcome to MyBoard"/>
+	<definition name = "board/view" extends = "boardLayout">
 		<put-attribute name="content" value = "/WEB-INF/views/board/view.jsp"/>
 	</definition>
 	
-	<definition name = "board/update" extends = "baseLayout">
-		<put-attribute name="title" value = "게시판"/>
-		<put-attribute name="heading" value = "마이 게시판"/>
-		<put-attribute name="subheading" value = "Welcome to MyBoard"/>
+	
+	<definition name = "board/write" extends = "boardLayout">
+		<put-attribute name="content" value = "/WEB-INF/views/board/write.jsp"/>
+	</definition>
+	
+	<definition name = "board/update" extends = "boardLayout">
 		<put-attribute name="content" value = "/WEB-INF/views/board/update.jsp"/>
+	</definition>
+	
+	<definition name = "memberLayout" extends = "baseLayout">
+		<put-attribute name="title" value = "회원정보"/>
+		<put-attribute name="heading" value = "마이 회원정보"/>
+		<put-attribute name="subheading" value = "Welcome to MyMember"/>
+	</definition>
+	
+	<definition name = "member/signup" extends = "memberLayout">
+		<put-attribute name="content" value = "/WEB-INF/views/member/signup.jsp"/>
+	</definition>
+	
+	<definition name = "member/login" extends = "memberLayout">
+		<put-attribute name="content" value = "/WEB-INF/views/member/login.jsp"/>
 	</definition>
 	
 </tiles-definitions>

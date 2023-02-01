@@ -43,6 +43,7 @@
 			<param-value>
 			  /WEB-INF/spring/appServlet/common-context.xml
 			  /WEB-INF/spring/appServlet/board-context.xml
+			  /WEB-INF/spring/appServlet/members-context.xml
 			</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>

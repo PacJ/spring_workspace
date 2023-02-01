@@ -17,14 +17,14 @@ $(document).ready(function(){
 		$('#frm').attr('action','write.do').submit();
 	});
 	
- 	$('#filepath').change(function(){
+ 	/* $('#filepath').change(function(){
 		console.log(this.files[0].size)
 		if(this.files[0].size > 100){
 			alert('1GB 이하만 첨부할 수 있습니다.');
 			$('#filepath').val('');
 			return false;
 		} 
-	});
+	}); */
 });
 
 </script>

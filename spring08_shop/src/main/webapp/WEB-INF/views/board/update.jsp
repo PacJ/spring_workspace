@@ -11,6 +11,18 @@ $(document).ready(function(){
       $('[name=content]').val($('[name=content]').val().replace(/\n/gi, '<br/>'));
       $('#frm').attr('action','update.do').submit();
    });
+   
+   $('#cancel').click(function(){
+	   $('#writer').val('${dto.writer}');
+	   $('#subject').val('${dto.subject}');
+	   $('#content').val('${dto.content}');
+	   $('#frm').attr('action', 'list.do').submit();
+   });
+   
+   $('#back').click(function(){
+	/*  history.back();   */
+	 history.go(-1);
+   }); 
 });
 </script>
 

@@ -17,4 +17,9 @@
 <bean class = "board.controller.BoardController">
 	<property name = "boardService" ref = "boardService" />
 </bean>
+
+<!-- 다운로드 뷰 선언 -->
+<bean id="download" class="board.view.BoardDownloadView">
+	<property name="boardDao" ref="boardDao" />
+</bean>
 </beans> 
