@@ -23,8 +23,8 @@
        
     <!--  ref == 0 제목글  ref ==1 답변글 -->
     <insert id = "save" parameterType="board.dto.BoardDTO">
-       INSERT INTO board(num, writer, subject, reg_date, readcount, ref, re_step, re_level, content, ip, upload, memberEmail)
-       VALUES(board_num_seq.nextval,#{writer}, #{subject}, sysdate, 0,
+       INSERT INTO board(num, subject, reg_date, readcount, ref, re_step, re_level, content, ip, upload, memberEmail)
+       VALUES(board_num_seq.nextval, #{subject}, sysdate, 0,
        <choose>
           <when test = "ref==0">
              board_num_seq.nextval,
@@ -44,9 +44,20 @@
     	WHERE num = #{num}
     </update>
     
-    <select id = "content" parameterType = "int" resultType = "board.dto.BoardDTO">
-    	SELECT * FROM board
-    	WHERE num = #{num}
+    <!-- mybatis에서는 memberName이 자동으로 들어가지만 spring에서는 null로 잡힌다. -->
+    <resultMap type="board.dto.BoardDTO" id="contentSelect" autoMapping="true">
+    	<association property="membersDTO" javaType="members.dto.MembersDTO" >
+    		<result column="memberName" property="memberName"/>
+    	</association>
+    </resultMap>
+    
+    <select id = "content" parameterType = "int" resultMap = "contentSelect">
+    	SELECT b.*, m.memberName
+		FROM board b, members m
+		WHERE b.memberEmail=m.memberEmail
+   		 AND m.memberEmail=(SELECT memberEmail FROM board
+   		 						WHERE num=#{num})
+		 AND num=#{num}
     </select>
     
     <update id="reStepCount" parameterType="board.dto.BoardDTO">

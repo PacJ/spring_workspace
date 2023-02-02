@@ -8,5 +8,5 @@ public interface MembersDAO {
 	public MembersDTO selectByEmail(String memberEmail);
 	
 	public void updateMember(MembersDTO dto);
-	public void updateByEmail(MembersDTO dto);
+	public void updateByPass(MembersDTO dto);
 }

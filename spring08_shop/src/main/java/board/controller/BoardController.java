@@ -6,6 +6,7 @@ import java.util.Random;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -19,6 +20,7 @@ import board.dto.BoardDTO;
 import board.dto.PageDTO;
 import board.service.BoardService;
 import common.file.FileUpload;
+import members.dto.AuthInfo;
 
 // http://localhost:8090/myapp/board/list.do
 
@@ -41,14 +43,13 @@ public class BoardController {
 		System.out.println("pv:" + pv.getCurrentPage());
 		int totalRecord = boardService.countProcess();
 		if(totalRecord>=1) {
-			if(pv.getCurrentPage()>=1) {
 				if(pv.getCurrentPage()==0)
 					pv.setCurrentPage(1);
 			}
 			this.pdto = new PageDTO(pv.getCurrentPage(), totalRecord);
 			mav.addObject("pv", this.pdto);
 			mav.addObject("aList", boardService.listProcess(this.pdto));
-		}
+			
 		mav.setViewName("board/list");
 		return mav;
 	}
@@ -60,8 +61,11 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value = "/board/write.do", method = RequestMethod.POST)
-	public String writeProExecute(BoardDTO dto, PageDTO pv, HttpServletRequest req, RedirectAttributes ratt) {
+	public String writeProExecute(BoardDTO dto, PageDTO pv, HttpServletRequest req, HttpSession session, RedirectAttributes ratt) {
 		MultipartFile file = dto.getFilename();
+		
+		// Spring에서는 Null.
+		// System.out.println(dto.getMembersDTO().getMemberName());
 		
 		//파일 첨부가 있으면...
 		if(!file.isEmpty()) {
@@ -70,6 +74,9 @@ public class BoardController {
 		}
 		
 		dto.setIp(req.getRemoteAddr());
+		
+//		AuthInfo authInfo = (AuthInfo)session.getAttribute("authInfo");
+//		dto.setMemberEmail(authInfo.getMemberEmail());
 		
 		boardService.insertProcess(dto);
 		

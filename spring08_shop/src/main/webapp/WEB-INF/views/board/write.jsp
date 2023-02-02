@@ -37,7 +37,9 @@ $(document).ready(function(){
 
 			<tr>
 				<td width="20%" align="center">writer</td>
-				<td><input type="text" name="writer" size="30" maxlength="30" readonly="readonly" value="${sessionScope.authInfo.memberEmail}"/></td>
+				<td>
+				<input type="hidden" name="memberEmail" value="${sessionScope.authInfo.memberEmail}" />
+				<input type="text" name="memberName" size="30" maxlength="30" readonly="readonly" value="${sessionScope.authInfo.memberName}"/></td>
 			</tr>
 
 			<tr>

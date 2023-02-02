@@ -28,11 +28,11 @@ public class MembersDaoImp implements MembersDAO{
 
 	@Override
 	public void updateMember(MembersDTO dto) {
-		
+		sqlSession.update("members.updateMember", dto);
 	}
 
 	@Override
-	public void updateByEmail(MembersDTO dto) {
-		
+	public void updateByPass(MembersDTO dto) {
+		sqlSession.update("members.updateByPass", dto);
 	}
 }

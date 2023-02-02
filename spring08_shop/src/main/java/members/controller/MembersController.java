@@ -5,6 +5,7 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -15,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import common.exception.WrongEmailPasswordException;
 import members.dto.AuthInfo;
+import members.dto.ChangePwdCommand;
 import members.dto.MembersDTO;
 import members.service.MembersService;
 
@@ -84,12 +86,52 @@ public class MembersController {
 			try {
 				PrintWriter out = resp.getWriter();
 //				out.print("아이디와 비밀번호가 일치하지 않습니다.");
-				out.print("<script>alert('아이디와 비밀번호가 일치하지 않습니다.'); location.href='login.do';</script>");
+				out.print("<script>alert('아이디와 비밀번호가 일치하지 않습니다.'); history.go(-1);</script>");
 				out.flush();
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
 		}
 		return null;
+	}
+	
+	@RequestMapping(value="/member/editmember.do", method=RequestMethod.GET)
+	public ModelAndView updateMember(ModelAndView mav, HttpSession session) {
+		AuthInfo authInfo = (AuthInfo)session.getAttribute("authInfo");
+		mav.addObject("membersDTO", membersService.updateMemberProcess(authInfo.getMemberEmail()));
+		mav.setViewName("member/editmember");
+		return mav;
+	}
+	
+	@RequestMapping(value="/member/editmember.do", method=RequestMethod.POST)
+	public String updateMember(MembersDTO membersDTO, HttpSession session) {
+		AuthInfo authInfo = membersService.updateMemberProcess(membersDTO);
+		session.setAttribute("authInfo", authInfo);
+		return "redirect:/home.do";
+	}
+	
+	@RequestMapping(value="/member/changepass.do", method=RequestMethod.GET)
+	public String changePassword() {
+		return "member/changepass";
+	}
+	
+	@RequestMapping(value="/member/changepass.do", method=RequestMethod.POST)
+	public String changePassword(ChangePwdCommand changePass, HttpSession session, HttpServletResponse resp) {
+		AuthInfo authInfo = (AuthInfo)session.getAttribute("authInfo");
+		try {
+			membersService.updatePassProcess(authInfo.getMemberEmail(), changePass);
+			return "redirect:/home.do";
+		} catch (WrongEmailPasswordException e) {
+			resp.setContentType("text/html;charset=UTF-8");
+			try {
+				PrintWriter out = resp.getWriter();
+//				out.print("아이디와 비밀번호가 일치하지 않습니다.");
+				out.print("<script>alert('현재 비밀번호가 틀렸습니다.'); </script>");
+				out.flush();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+			return "member/changepass";
+		}
 	}
 }//end class

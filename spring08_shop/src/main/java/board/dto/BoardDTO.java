@@ -4,10 +4,13 @@ import java.sql.Date;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import members.dto.MembersDTO;
+
 public class BoardDTO {
 	private int num, readcount, ref, re_step, re_level;
-	private String writer, subject, content, ip, memberEmail;
+	private String subject, content, ip, memberEmail;
 	private Date reg_date;
+	private MembersDTO membersDTO;
 	
 	//board 테이블의 파일 첨부를 처리해주는 멤버 변수
 	private String upload; 
@@ -17,6 +20,14 @@ public class BoardDTO {
 	
 	public BoardDTO() {
 
+	}
+	
+	public MembersDTO getMembersDTO() {
+		return membersDTO;
+	}
+
+	public void setMembersDTO(MembersDTO membersDTO) {
+		this.membersDTO = membersDTO;
 	}
 
 	public int getNum() {
@@ -57,14 +68,6 @@ public class BoardDTO {
 
 	public void setRe_level(int re_level) {
 		this.re_level = re_level;
-	}
-
-	public String getWriter() {
-		return writer;
-	}
-
-	public void setWriter(String writer) {
-		this.writer = writer;
 	}
 
 	public String getSubject() {

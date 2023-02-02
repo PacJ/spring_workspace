@@ -27,7 +27,7 @@ $(document).ready(function(){
 	<table class="table  table-bordered">
 		<tr>
 			<th width="20%">작성자</th>
-			<td >${dto.writer}</td>
+			<td >${dto.membersDTO.memberName}</td>
 			<th width="20%" >조회수</th>
 			<td>${dto.readcount}</td>
 		</tr>
@@ -63,9 +63,12 @@ $(document).ready(function(){
 			</c:if>
 			
 			<input type="button" id="list" 	value="리스트" />		   
-			<input type="button" id="answer" value="답변" />				
-			<input type="button" id="update" value="수정" /> 
-			<input type="button" id="delete" value="삭제" />
+			<input type="button" id="answer" value="답변" />		
+			
+			<c:if test="${sessionScope.authInfo !=null && sessionScope.authInfo.memberEmail==dto.memberEmail}">		
+				<input type="button" id="update" value="수정" /> 
+				<input type="button" id="delete" value="삭제" />
+			</c:if>
 		</form>
 	</div>
 </div>

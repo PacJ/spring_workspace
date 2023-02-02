@@ -41,18 +41,23 @@ public class MembersServiceImp implements MembersService{
 
 	@Override
 	public MembersDTO updateMemberProcess(String memberEmail) {
-		return null;
+		return membersDao.selectByEmail(memberEmail);
 	}
 
 	@Override
-	public void updateMemberProcess(MembersDTO dto) {
-		// TODO Auto-generated method stub
-		
+	public AuthInfo updateMemberProcess(MembersDTO dto) {
+		membersDao.updateMember(dto);
+		MembersDTO member = membersDao.selectByEmail(dto.getMemberEmail());
+		return new AuthInfo(member.getMemberEmail(), member.getMemberName(), member.getMemberPass());
 	}
 
 	@Override
 	public void updatePassProcess(String memberEmail, ChangePwdCommand changePwd) {
-		// TODO Auto-generated method stub
-		
+		MembersDTO member = membersDao.selectByEmail(memberEmail);
+		if(member == null) {
+			throw new WrongEmailPasswordException();
+		}
+		member.changePassword(changePwd.getCurrentPassword(), changePwd.getNewPassword());
+		membersDao.updateByPass(member);
 	}
 }

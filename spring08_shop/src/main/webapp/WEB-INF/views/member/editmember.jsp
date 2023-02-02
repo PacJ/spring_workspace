@@ -5,7 +5,7 @@
  <div class="container">
      <div class="input-form-backgroud row">
       <div class="input-form col-md-12 mx-auto">       
-        <form class="validation-form" method="post" action="signup.do" novalidate >
+        <form class="validation-form" method="post" action="editmember.do" novalidate >
       
            <div class="row">              
 	         <div class="mb-3">

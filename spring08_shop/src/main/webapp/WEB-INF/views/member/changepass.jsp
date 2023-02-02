@@ -8,11 +8,11 @@
 			<form name="login" method="post"  action="changepass.do" >
 				<div class="form-group">
 				    <label class="fw-bolder">현재 비밀번호: </label>
-					<input type="password" class="form-control" name="currentPassword" placeholder="currentPassword" required="required">		
+					<input type="password" class="form-control" name="currentPassword" placeholder="Current Password" required="required">		
 				</div>
 				<div class="form-group mt-3">
 				 <label class="fw-bolder">새 비밀번호: </label>
-					<input type="password" class="form-control" name="newPassword" placeholder="newPassword" required="required">	
+					<input type="password" class="form-control" name="newPassword" placeholder="New Password" required="required">	
 				</div>   				
 				
 				     

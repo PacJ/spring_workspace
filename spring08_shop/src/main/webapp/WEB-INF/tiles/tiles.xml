@@ -56,4 +56,14 @@
 		<put-attribute name="content" value = "/WEB-INF/views/member/login.jsp"/>
 	</definition>
 	
+	<definition name = "member/editmember" extends = "memberLayout">
+		<put-attribute name="content" value = "/WEB-INF/views/member/editmember.jsp"/>
+	</definition>
+	
+	<definition name = "member/changepass" extends = "memberLayout">
+		<put-attribute name="content" value = "/WEB-INF/views/member/changepass.jsp"/>
+	</definition>
+	
+	
+	
 </tiles-definitions>
