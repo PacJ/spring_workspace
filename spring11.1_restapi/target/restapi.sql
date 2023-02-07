@@ -1,0 +1,5 @@
+SELECT * FROM mem
+ORDER BY num DESC;
+
+DELETE FROM mem
+WHERE num >= 100;

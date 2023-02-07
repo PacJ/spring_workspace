@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace = "mem">
+	 <select id = "all" resultType = "model.MemDTO">
+	 	SELECT * FROM mem
+	 	ORDER BY num DESC
+	 </select>
+	 
+	 <insert id = "ins" parameterType = "model.MemDTO">
+	 	INSERT INTO mem(num, name, age, loc)
+	 	VALUES(mem_num_seq.nextval, #{name, jdbcType = VARCHAR}, #{age}, #{loc, jdbcType = VARCHAR})
+	 </insert>
+	 
+	 <select id = "one" parameterType="int" resultType = "model.MemDTO">
+	 SELECT * FROM mem
+	 WHERE num = #{num}
+	 </select>
+	 
+	 <select id = "search" parameterType = "model.MemDTO" resultType = "model.MemDTO">
+	 SELECT * FROM mem
+	 WHERE num = #{num} and name = #{name}
+	 </select>
+	 
+	 <update id = "upt" parameterType="model.MemDTO">
+	 UPDATE mem SET name = #{name}, age = #{age}, loc = #{loc}
+	 WHERE num = #{num}
+	 </update>
+	 
+	 <delete id = "del" parameterType="int">
+	 	DELETE FROM mem
+	 	WHERE num = #{num}
+	 </delete>
+	 
+</mapper>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<mvc:annotation-driven></mvc:annotation-driven>
+
+	<!-- [1] DataSource 빈 선언 -->
+	<bean id = "dataSource" class = "org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name = "driverClassName" value = "oracle.jdbc.OracleDriver" />
+		<property name = "url" value = "jdbc:oracle:thin:@127.0.0.1:1521:xe" />
+		<property name = "username" value = "hr" />
+		<property name = "password" value = "a1234" />
+	</bean>
+	
+	<!-- [2] SqlSessionFactoryBean 빈 선언 -->
+	<bean id = "sqlSessionFactoryBean" class = "org.mybatis.spring.SqlSessionFactoryBean">
+		<property name = "dataSource" ref = "dataSource" />
+		<property name = "mapperLocations" >
+			<list>
+				<value>classpath:mapper/memMapper.xml</value>
+			</list>
+		</property>
+		
+		<!-- <property name="configLocation" value = "classpath:mybatis/configuration.xml"></property> -->
+	</bean>
+	
+	<!-- [3] SqlSessionTemplate 빈 선언 -->
+	<bean id = "sqlSession" class = "org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref = "sqlSessionFactoryBean" />
+	</bean>
+	
+	<!-- [4] MemDaoImp 빈 선언 -->
+	<bean id = "dao" class = "dao.MemDaoImp">
+		<property name = "sqlSession" ref = "sqlSession" />
+	</bean>
+	
+	<!-- [5] Controller 빈 선언 -->
+	<bean class = "controller.MemController">
+		<property name = "memDao" ref = "dao" />
+	</bean>
+	
+</beans>

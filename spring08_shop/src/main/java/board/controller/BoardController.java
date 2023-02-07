@@ -39,7 +39,7 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/board/list.do")//받는 것             //보내주는 것
-	public ModelAndView listExecute(@ModelAttribute("pv") PageDTO pv, ModelAndView mav) {
+	public ModelAndView listExecute(@ModelAttribute("pv") PageDTO pv, ModelAndView mav, AuthInfo authInfo) {
 		System.out.println("pv:" + pv.getCurrentPage());
 		int totalRecord = boardService.countProcess();
 		if(totalRecord>=1) {
@@ -49,6 +49,10 @@ public class BoardController {
 			this.pdto = new PageDTO(pv.getCurrentPage(), totalRecord);
 			mav.addObject("pv", this.pdto);
 			mav.addObject("aList", boardService.listProcess(this.pdto));
+			
+			
+//			AuthInfo ai = (AuthInfo)session.getAttribute("authInfo");
+//			dto.setMemberEmail(authInfo.getMemberEmail());
 			
 		mav.setViewName("board/list");
 		return mav;
