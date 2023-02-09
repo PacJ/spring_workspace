@@ -1,5 +1,4 @@
 INDEX VERSION 1.4+C:\k_digital\spring_workspace\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
-1038758959.index
 81464996.index
 2530925497.index
 1606835407.index
@@ -9,8 +8,6 @@ INDEX VERSION 1.4+C:\k_digital\spring_workspace\.metadata\.plugins\org.eclipse.w
 3835732959.index
 1758431822.index
 2642072083.index
-3608132504.index
 1499958398.index
-1294298851.index
 3949447798.index
-3131378801.index
+1294298851.index
